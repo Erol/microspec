@@ -1,4 +1,4 @@
-require "microspec/version"
+require 'microspec/version'
 
 module Microspec
   # Your code goes here...
