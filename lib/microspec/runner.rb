@@ -7,5 +7,9 @@ module Microspec
     def includes
       @_includes ||= []
     end
+
+    def excludes
+      @_excludes ||= []
+    end
   end
 end
