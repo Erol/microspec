@@ -3,5 +3,9 @@ module Microspec
     def requires
       @_requires ||= []
     end
+
+    def includes
+      @_includes ||= []
+    end
   end
 end
