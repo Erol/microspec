@@ -12,5 +12,9 @@ module Microspec
       @_description = description
       @_block = block
     end
+
+    def perform
+      instance_eval(&block)
+    end
   end
 end
