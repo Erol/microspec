@@ -11,5 +11,9 @@ module Microspec
     def excludes
       @_excludes ||= []
     end
+
+    def filenames
+      Dir[*includes] - Dir[*excludes] - requires
+    end
   end
 end
