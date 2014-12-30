@@ -22,7 +22,11 @@ module Microspec
       end
 
       filenames.each do |filename|
-        load filename
+        scope = Scope.new filename do
+          load filename
+        end
+
+        scope.perform
       end
     end
   end
