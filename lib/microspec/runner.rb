@@ -15,5 +15,15 @@ module Microspec
     def filenames
       Dir[*includes] - Dir[*excludes] - requires
     end
+
+    def perform
+      requires.each do |filename|
+        require File.join Dir.pwd, filename
+      end
+
+      filenames.each do |filename|
+        load filename
+      end
+    end
   end
 end
