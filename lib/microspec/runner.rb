@@ -23,7 +23,7 @@ module Microspec
 
       filenames.each do |filename|
         scope = Scope.new filename do
-          load filename
+          eval File.read filename
         end
 
         scope.perform
