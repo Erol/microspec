@@ -1,5 +1,9 @@
+require 'microspec/raise'
+
 module Microspec
   class Spec
+    include Raises::Method
+
     def description
       @_description
     end
