@@ -39,3 +39,9 @@ spec do
     raise SomeException
   end
 end
+
+spec do
+  raises do
+    raise SomeException
+  end
+end
