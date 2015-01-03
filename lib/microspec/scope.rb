@@ -1,3 +1,5 @@
+require 'microspec/spec'
+
 module Microspec
   class Scope
     def description
@@ -6,6 +8,11 @@ module Microspec
 
     def block
       @_block
+    end
+
+    def spec(description = nil, &block)
+      spec = Spec.new description, &block
+      spec.perform
     end
 
     def initialize(description = nil, &block)
