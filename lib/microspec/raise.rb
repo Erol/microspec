@@ -16,6 +16,8 @@ module Microspec
                       Flunked.new 'unexpected exception', expected: expected, actual: actual
                     elsif message.is_a? String and not actual.message == message
                       Flunked.new 'unexpected exception message', expected: expected, actual: actual
+                    elsif message.is_a? Regexp and not actual.message =~ message
+                      Flunked.new 'unexpected exception message', expected: expected, actual: actual
                     end
 
         raise exception if exception
