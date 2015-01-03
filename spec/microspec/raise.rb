@@ -45,3 +45,9 @@ spec do
     raise SomeException
   end
 end
+
+spec do
+  raises SomeException, 'failed' do
+    raise SomeException, 'failed'
+  end
+end
