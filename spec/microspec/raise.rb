@@ -17,3 +17,11 @@ spec do
     end
   end
 end
+
+spec do
+  raises Microspec::Flunked, 'unexpected exception message' do
+    raises SomeException, 'failed' do
+      raise SomeException, 'flunked'
+    end
+  end
+end
