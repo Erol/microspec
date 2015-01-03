@@ -1,3 +1,5 @@
+require 'microspec/scope'
+
 module Microspec
   class Runner
     def requires
