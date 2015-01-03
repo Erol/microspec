@@ -12,6 +12,8 @@ module Microspec
       ensure
         exception = if actual.nil?
                       Flunked.new 'missing exception', expected: expected, actual: actual
+                    elsif not actual.is_a? expected.class
+                      Flunked.new 'unexpected exception', expected: expected, actual: actual
                     end
 
         raise exception if exception
