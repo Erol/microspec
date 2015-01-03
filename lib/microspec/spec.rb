@@ -7,5 +7,10 @@ module Microspec
     def block
       @_block
     end
+
+    def initialize(description = nil, &block)
+      @_description = description
+      @_block = block
+    end
   end
 end
