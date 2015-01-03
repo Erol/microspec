@@ -2,7 +2,7 @@ require 'microspec/raise'
 
 module Microspec
   class Spec
-    include Raises::Method
+    include Raise::Method
 
     def description
       @_description
