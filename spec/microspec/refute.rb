@@ -35,3 +35,7 @@ end
 spec do
   refutes(false).truthy?
 end
+
+spec do
+  refutes(100) == 1000
+end
