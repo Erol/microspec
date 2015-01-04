@@ -35,3 +35,7 @@ end
 spec do
   asserts(false).falsey?
 end
+
+spec do
+  asserts(100) == 100
+end
