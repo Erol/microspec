@@ -43,25 +43,25 @@ end
 
 
 spec do
-  raises Microspec::Flunked, 'failed assert' do
+  raises Microspec::Flunked, 'failed refute' do
     refutes([1, 2, 3]).include? 3
   end
 end
 
 spec do
-  raises Microspec::Flunked, 'failed assert' do
+  raises Microspec::Flunked, 'failed refute' do
     refutes(true).truthy?
   end
 end
 
 spec do
-  raises Microspec::Flunked, 'failed assert' do
+  raises Microspec::Flunked, 'failed refute' do
     refutes(false).falsey?
   end
 end
 
 spec do
-  raises Microspec::Flunked, 'failed assert' do
+  raises Microspec::Flunked, 'failed refute' do
     refutes(100) == 100
   end
 end
