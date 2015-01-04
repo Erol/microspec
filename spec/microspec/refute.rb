@@ -27,3 +27,7 @@ end
 spec do
   refutes([1, 2, 3]).include? 4
 end
+
+spec do
+  refutes(true).falsey?
+end
