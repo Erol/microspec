@@ -27,3 +27,7 @@ end
 spec do
   asserts([1, 2, 3]).include? 3
 end
+
+spec do
+  asserts(true).truthy?
+end
