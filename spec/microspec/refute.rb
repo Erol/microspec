@@ -17,3 +17,9 @@ spec do
     refutes(false).falsey?
   end
 end
+
+spec do
+  raises Microspec::Flunked, 'failed assert' do
+    refutes(100) == 100
+  end
+end
