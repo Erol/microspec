@@ -23,3 +23,7 @@ spec do
     refutes(100) == 100
   end
 end
+
+spec do
+  refutes([1, 2, 3]).include? 4
+end
