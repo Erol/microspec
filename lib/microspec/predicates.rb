@@ -10,4 +10,6 @@ module Microspec
       @_predicates[method] = proc
     end
   end
+
+  Predicates[:truthy?] = -> (actual) { actual }
 end
