@@ -31,3 +31,7 @@ end
 spec do
   refutes(true).falsey?
 end
+
+spec do
+  refutes(false).truthy?
+end
