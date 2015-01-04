@@ -31,3 +31,7 @@ end
 spec do
   asserts(true).truthy?
 end
+
+spec do
+  asserts(false).falsey?
+end
