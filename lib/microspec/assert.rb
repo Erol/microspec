@@ -13,6 +13,10 @@ module Microspec
         @_actual = actual
       end
 
+      def ==(expected)
+        method_missing :==, expected
+      end
+
       def method_missing(method, *expected, &block)
         unless @_actual.send method, *expected
           raise Flunked.new 'failed assert', actual: @_actual, method: method, expected: expected

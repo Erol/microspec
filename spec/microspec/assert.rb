@@ -17,3 +17,9 @@ spec do
     asserts(false).truthy?
   end
 end
+
+spec do
+  raises Microspec::Flunked, 'failed assert' do
+    asserts(100) == 1000
+  end
+end
