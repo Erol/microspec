@@ -23,3 +23,7 @@ spec do
     asserts(100) == 1000
   end
 end
+
+spec do
+  asserts([1, 2, 3]).include? 3
+end
