@@ -25,7 +25,7 @@ module Microspec
 
       filenames.each do |filename|
         scope = Scope.new filename do
-          eval File.read(filename), nil, filename
+          instance_eval File.read(filename), filename
         end
 
         scope.perform
