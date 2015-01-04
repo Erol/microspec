@@ -1,8 +1,10 @@
 require 'microspec/raise'
+require 'microspec/assert'
 
 module Microspec
   class Spec
     include Raise::Method
+    include Assert::Method
 
     def description
       @_description
