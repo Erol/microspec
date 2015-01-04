@@ -12,4 +12,5 @@ module Microspec
   end
 
   Predicates[:truthy?] = -> (actual) { actual }
+  Predicates[:falsey?] = -> (actual) { !actual }
 end
