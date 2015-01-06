@@ -31,7 +31,7 @@ module Microspec
       rescue Exception => exception
       ensure
         if exception.instance_of? NoMethodError and Predicates[method]
-          unless !!@_boolean == !!Predicates[method].call(@_actual, *expected, &block)
+          unless @_boolean == !!Predicates[method].call(@_actual, *expected, &block)
             raise Flunked.new "failed #{@_type}", actual: @_actual, method: method, expected: expected
           end
         elsif exception
