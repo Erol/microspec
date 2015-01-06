@@ -24,7 +24,7 @@ module Microspec
       end
 
       def method_missing(method, *expected, &block)
-        unless !!@_boolean == !!@_actual.send(method, *expected)
+        unless @_boolean == !!@_actual.send(method, *expected)
           raise Flunked.new "failed #{@_type}", actual: @_actual, method: method, expected: expected
         end
 
