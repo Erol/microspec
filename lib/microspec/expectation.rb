@@ -7,12 +7,12 @@ module Microspec
     end
 
     def self.evaluate(boolean, actual, method, expected, type: type(boolean), &block)
-      unless boolean == !!actual.send(method, *expected)
+      if boolean ^ actual.send(method, *expected)
         raise Flunked.new "failed #{type}", actual: actual, method: method, expected: expected
       end
 
     rescue NoMethodError
-      unless boolean == !!Predicates[method].call(actual, *expected, &block)
+      if boolean ^ Predicates[method].call(actual, *expected, &block)
         raise Flunked.new "failed #{type}", actual: actual, method: method, expected: expected
       end
     end
