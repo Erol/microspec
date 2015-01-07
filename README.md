@@ -1,4 +1,5 @@
 [![Code Climate](https://codeclimate.com/github/Erol/microspec/badges/gpa.svg)](https://codeclimate.com/github/Erol/microspec)
+[![Test Coverage](https://codeclimate.com/github/Erol/microspec/badges/coverage.svg)](https://codeclimate.com/github/Erol/microspec)
 
 # Microspec
 
