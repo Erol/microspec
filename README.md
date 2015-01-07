@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/Erol/microspec/badges/gpa.svg)](https://codeclimate.com/github/Erol/microspec)
+
 # Microspec
 
 TODO: Write a gem description
