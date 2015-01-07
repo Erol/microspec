@@ -2,9 +2,11 @@ require 'microspec/predicates'
 
 module Microspec
   module Expectation
-    def self.evaluate(boolean, actual, method, expected, &block)
-      type = boolean ? 'assert' : 'refute'
+    def self.type(boolean)
+      boolean ? 'assert' : 'refute'
+    end
 
+    def self.evaluate(boolean, actual, method, expected, type: type(boolean), &block)
       unless boolean == !!actual.send(method, *expected)
         raise Flunked.new "failed #{type}", actual: actual, method: method, expected: expected
       end
