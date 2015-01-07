@@ -3,3 +3,9 @@ rvm:
   - 2.0.0
   - 2.1.5
   - 2.2.0
+env:
+  - CODECLIMATE_REPO_COVERAGE=true
+addons:
+  code_climate:
+    repo_token:
+      secure: "a8O1A7NSj4RBWKDGH31PG0RY2aATpVc6neC+kCTsSbqip6LE0JrJHSWbvF4TDD5SrgJc+s55elwkVOLRVsCeBL45+T4lOdopUr5n6nEz9ChUX2AeaT1V/fw/tAVKi/5tdMpCh72+CMiTsJsHxaSF1McA74A57pOtyu0ea/QHCKQ="
