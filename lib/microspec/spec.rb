@@ -20,7 +20,7 @@ module Microspec
     end
 
     def perform
-      instance_eval &block
+      instance_eval(&block)
     end
   end
 end
