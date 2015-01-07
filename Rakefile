@@ -1,10 +1,11 @@
 require 'bundler/gem_tasks'
-require 'microspec'
 
 $VERBOSE = true
 
 desc 'Run gem specs'
 task :spec do
+  require 'microspec'
+
   runner = Microspec::Runner.new
   runner.includes << 'spec/**/*.rb'
   runner.excludes << 'spec/examples/**/*.rb'
