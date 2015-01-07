@@ -25,6 +25,12 @@ spec do
 end
 
 spec do
+  raises NoMethodError, /unknown/  do
+    asserts(100).unknown?
+  end
+end
+
+spec do
   asserts([1, 2, 3]).include? 3
 end
 
@@ -63,6 +69,12 @@ end
 spec do
   raises Microspec::Flunked, 'failed refute' do
     refutes(100) == 100
+  end
+end
+
+spec do
+  raises NoMethodError, /unknown/  do
+    refutes(100).unknown?
   end
 end
 
