@@ -2,6 +2,20 @@ require 'microspec/predicates'
 
 module Microspec
   module Expectation
+    def self.evaluate(boolean, actual, method, expected, &block)
+      type = boolean ? 'assert' : 'refute'
+
+      unless boolean == !!actual.send(method, *expected)
+        raise Flunked.new "failed #{type}", actual: actual, method: method, expected: expected
+      end
+
+    rescue NoMethodError => exception
+      unless boolean == !!Predicates[method].call(actual, *expected, &block)
+        raise Flunked.new "failed #{type}", actual: actual, method: method, expected: expected
+      end
+
+    end
+
     module Methods
       def asserts(object)
         Object.new true, object
@@ -15,7 +29,6 @@ module Microspec
     class Object
       def initialize(boolean, actual)
         @_boolean = boolean
-        @_type = boolean ? 'assert' : 'refute'
         @_actual = actual
       end
 
@@ -24,19 +37,7 @@ module Microspec
       end
 
       def method_missing(method, *expected, &block)
-        unless @_boolean == !!@_actual.send(method, *expected)
-          raise Flunked.new "failed #{@_type}", actual: @_actual, method: method, expected: expected
-        end
-
-      rescue Exception => exception
-      ensure
-        if exception.instance_of? NoMethodError and Predicates[method]
-          unless @_boolean == !!Predicates[method].call(@_actual, *expected, &block)
-            raise Flunked.new "failed #{@_type}", actual: @_actual, method: method, expected: expected
-          end
-        elsif exception
-          raise exception
-        end
+        Expectation.evaluate @_boolean, @_actual, method, expected
       end
     end
   end
