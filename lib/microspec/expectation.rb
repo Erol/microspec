@@ -9,7 +9,7 @@ module Microspec
         raise Flunked.new "failed #{type}", actual: actual, method: method, expected: expected
       end
 
-    rescue NoMethodError => exception
+    rescue NoMethodError
       unless boolean == !!Predicates[method].call(actual, *expected, &block)
         raise Flunked.new "failed #{type}", actual: actual, method: method, expected: expected
       end
