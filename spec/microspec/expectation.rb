@@ -25,6 +25,18 @@ spec do
 end
 
 spec do
+  raises Microspec::Flunked, 'failed assert' do
+    asserts(100) > 1000
+  end
+end
+
+spec do
+  raises Microspec::Flunked, 'failed assert' do
+    asserts(100) < 10
+  end
+end
+
+spec do
   raises NoMethodError, /unknown/  do
     asserts(100).unknown?
   end
@@ -44,6 +56,14 @@ end
 
 spec do
   asserts(100) == 100
+end
+
+spec do
+  asserts(100) < 1000
+end
+
+spec do
+  asserts(100) > 10
 end
 
 
