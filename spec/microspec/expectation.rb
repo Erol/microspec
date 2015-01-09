@@ -93,6 +93,18 @@ spec do
 end
 
 spec do
+  raises Microspec::Flunked, 'failed refute' do
+    refutes(100) < 1000
+  end
+end
+
+spec do
+  raises Microspec::Flunked, 'failed refute' do
+    refutes(100) > 10
+  end
+end
+
+spec do
   raises NoMethodError, /unknown/  do
     refutes(100).unknown?
   end
@@ -112,4 +124,12 @@ end
 
 spec do
   refutes(100) == 1000
+end
+
+spec do
+  refutes(100) > 1000
+end
+
+spec do
+  refutes(100) < 10
 end
