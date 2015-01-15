@@ -12,8 +12,8 @@ module Microspec
       end
 
     rescue NoMethodError => exception
-      if Predicates[method]
-        if boolean ^ Predicates[method].call(actual, *expected, &block)
+      if predicate = Predicates[method]
+        if boolean ^ predicate.call(actual, *expected, &block)
           raise Flunked.new "failed #{type}", actual: actual, method: method, expected: expected
         end
       else
