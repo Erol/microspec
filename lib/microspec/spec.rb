@@ -1,5 +1,6 @@
 require 'microspec/raise'
 require 'microspec/expectation'
+require 'microspec/context'
 
 module Microspec
   class Spec
@@ -20,7 +21,9 @@ module Microspec
     end
 
     def perform
-      instance_eval(&block)
+      context = Context.new
+
+      instance_exec context, &block
     end
   end
 end
