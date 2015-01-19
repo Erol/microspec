@@ -46,6 +46,18 @@ module Microspec
       end
     end
 
+    def initialize(description = nil, parent: nil, &block)
+      @_description = description
+      @_parent = parent
+      @_block = block
+    end
+
+    def perform
+      instance_eval(&block)
+    end
+
+    protected
+
     def start(context)
       parent.start context if parent
 
@@ -60,16 +72,6 @@ module Microspec
       afters.each do |after|
         after.call context
       end
-    end
-
-    def initialize(description = nil, parent: nil, &block)
-      @_description = description
-      @_parent = parent
-      @_block = block
-    end
-
-    def perform
-      instance_eval(&block)
     end
   end
 end
