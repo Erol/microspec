@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['erol.fornoles@gmail.com']
   spec.summary       = %q{Lean testing framework for Ruby}
   spec.description   = %q{Lean testing framework for Ruby}
-  spec.homepage      = ''
+  spec.homepage      = 'https://github.com/Erol/microspec'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0")
