@@ -6,24 +6,20 @@ module Microspec
       @_description
     end
 
-    def context
-      @_context
-    end
-
     def block
       @_block
     end
 
     def spec(description = nil, &block)
-      spec = Spec.new description, scope: self, &block
+      context = Context.new
+
+      spec = Spec.new description, context: context, &block
       spec.perform
     end
 
     def initialize(description = nil, &block)
       @_description = description
       @_block = block
-
-      @_context = Context.new
     end
 
     def perform

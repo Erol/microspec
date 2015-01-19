@@ -11,22 +11,22 @@ module Microspec
       @_description
     end
 
-    def scope
-      @_scope
+    def context
+      @_context
     end
 
     def block
       @_block
     end
 
-    def initialize(description = nil, scope: nil, &block)
+    def initialize(description = nil, context: nil, &block)
       @_description = description
-      @_scope = scope
+      @_context = context
       @_block = block
     end
 
     def perform
-      instance_exec scope.context, &block
+      instance_exec context, &block
     end
   end
 end
