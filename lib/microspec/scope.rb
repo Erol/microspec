@@ -10,14 +10,6 @@ module Microspec
       @_parent
     end
 
-    def setups
-      @_setups ||= []
-    end
-
-    def teardowns
-      @_setups ||= []
-    end
-
     def block
       @_block
     end
@@ -57,6 +49,14 @@ module Microspec
     end
 
     protected
+
+    def setups
+      @_setups ||= []
+    end
+
+    def teardowns
+      @_setups ||= []
+    end
 
     def start(context)
       parent.start context if parent
