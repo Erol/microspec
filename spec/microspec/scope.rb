@@ -1,5 +1,5 @@
 scope do
-  before do
+  setup do
     $a = :a
   end
 
@@ -8,7 +8,7 @@ scope do
   end
 
   scope do
-    before do
+    setup do
       $b = :b
     end
 
@@ -17,7 +17,7 @@ scope do
     end
 
     scope do
-      after do
+      teardown do
         $b = nil
       end
     end
@@ -26,7 +26,7 @@ scope do
       asserts($b).nil?
     end
 
-    after do
+    teardown do
       $a = nil
     end
   end
@@ -39,7 +39,7 @@ end
 
 
 scope do
-  before do |context|
+  setup do |context|
     context[:a] = :a
   end
 
@@ -48,7 +48,7 @@ scope do
   end
 
   scope do
-    before do |context|
+    setup do |context|
       context[:b] = :b
     end
 

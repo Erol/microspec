@@ -10,24 +10,24 @@ module Microspec
       @_parent
     end
 
-    def befores
-      @_befores ||= []
+    def setups
+      @_setups ||= []
     end
 
-    def afters
-      @_befores ||= []
+    def teardowns
+      @_setups ||= []
     end
 
     def block
       @_block
     end
 
-    def before(&block)
-      befores << block
+    def setup(&block)
+      setups << block
     end
 
-    def after(&block)
-      afters << block
+    def teardown(&block)
+      teardowns << block
     end
 
     def scope(description = nil, &block)
@@ -61,16 +61,16 @@ module Microspec
     def start(context)
       parent.start context if parent
 
-      befores.each do |before|
-        before.call context
+      setups.each do |setup|
+        setup.call context
       end
     end
 
     def finish(context)
       parent.finish context if parent
 
-      afters.each do |after|
-        after.call context
+      teardowns.each do |teardown|
+        teardown.call context
       end
     end
   end
