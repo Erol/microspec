@@ -1,5 +1,3 @@
-require 'microspec'
-
 class SomeException < Exception; end
 class SomeOtherException < Exception; end
 
