@@ -1,3 +1,29 @@
+define hash: -> { {o: :o} }
+
+scope do
+  define hash: -> { {O: :O} }
+
+  spec do
+    asserts(hash) == {O: :O}
+  end
+end
+
+spec do
+  asserts(hash) == {o: :o}
+end
+
+spec do
+  hash.merge! O: :O
+
+  asserts(hash) == {o: :o, O: :O}
+end
+
+define derived: -> { hash.merge O: :O }
+
+spec do
+  asserts(derived) == {o: :o, O: :O}
+end
+
 scope do
   setup do
     $a = :a

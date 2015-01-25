@@ -4,9 +4,6 @@ require 'microspec/context'
 
 module Microspec
   class Spec
-    include Raise::Method
-    include Expectation::Methods
-
     def description
       @_description
     end
@@ -19,14 +16,14 @@ module Microspec
       @_block
     end
 
-    def initialize(description = nil, context: nil, &block)
+    def initialize(description = nil, context: Microspec::Context, &block)
       @_description = description
       @_context = context
       @_block = block
     end
 
     def perform
-      instance_exec context, &block
+      context.new.instance_eval(&block)
     end
   end
 end

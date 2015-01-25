@@ -10,8 +10,30 @@ module Microspec
       @_parent
     end
 
+    def context
+      @_context
+    end
+
     def block
       @_block
+    end
+
+    def definitions
+      @_definitions ||= {}
+    end
+
+    def define(definitions)
+      definitions.each do |key, value|
+        context.send :define_method, key do
+          __memoizations.fetch key do
+            __memoizations[key] = if value.is_a? Proc
+                                    instance_exec(&value)
+                                  else
+                                    value
+                                  end
+          end
+        end
+      end
     end
 
     def setup(&block)
@@ -23,24 +45,23 @@ module Microspec
     end
 
     def scope(description = nil, &block)
-      scope = Scope.new description, parent: self, &block
+      scope = Scope.new description, parent: self, context: Class.new(context), &block
       scope.perform
     end
 
     def spec(description = nil, &block)
-      Context.new.tap do |context|
-        start context
+      start
 
-        spec = Spec.new description, context: context, &block
-        spec.perform
+      spec = Spec.new description, context: context, &block
+      spec.perform
 
-        finish context
-      end
+      finish
     end
 
-    def initialize(description = nil, parent: nil, &block)
+    def initialize(description = nil, parent: nil, context: nil, &block)
       @_description = description
       @_parent = parent
+      @_context = context
       @_block = block
     end
 
@@ -58,19 +79,19 @@ module Microspec
       @_setups ||= []
     end
 
-    def start(context)
-      parent.start context if parent
+    def start
+      parent.start if parent
 
       setups.each do |setup|
-        setup.call context
+        setup.call
       end
     end
 
-    def finish(context)
-      parent.finish context if parent
+    def finish
+      parent.finish if parent
 
       teardowns.each do |teardown|
-        teardown.call context
+        teardown.call
       end
     end
   end

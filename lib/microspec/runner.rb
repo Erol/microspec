@@ -24,7 +24,8 @@ module Microspec
       end
 
       filenames.each do |filename|
-        scope = Scope.new filename do
+        context = Class.new Microspec::Context
+        scope = Scope.new filename, context: context do
           instance_eval File.read(filename), filename
         end
 
