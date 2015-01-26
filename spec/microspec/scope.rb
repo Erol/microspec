@@ -1,3 +1,17 @@
+setup do
+  @variable = 1
+end
+
+spec do
+  refutes(self).instance_variable_defined? :@variable
+end
+
+@variable = 1
+
+spec do
+  refutes(self).instance_variable_defined? :@variable
+end
+
 define hash: -> { {o: :o} }
 
 scope do
