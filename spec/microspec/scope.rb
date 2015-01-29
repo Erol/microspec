@@ -38,6 +38,12 @@ spec do
   asserts(derived) == {o: :o, O: :O}
 end
 
+define value: 1
+
+spec do
+  asserts(value) == 1
+end
+
 scope do
   setup do
     $a = :a
