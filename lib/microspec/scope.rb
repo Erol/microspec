@@ -50,12 +50,14 @@ module Microspec
     end
 
     def spec(description = nil, &block)
-      start
+      instance = context.new
 
-      spec = Spec.new description, context: context, &block
+      start instance
+
+      spec = Spec.new description, instance: instance, &block
       spec.perform
 
-      finish
+      finish instance
     end
 
     def initialize(description = nil, parent: nil, context: nil, &block)
@@ -79,19 +81,19 @@ module Microspec
       @_setups ||= []
     end
 
-    def start
-      parent.start if parent
+    def start(instance)
+      parent.start instance if parent
 
       setups.each do |setup|
-        setup.call
+        instance.instance_exec(&setup)
       end
     end
 
-    def finish
-      parent.finish if parent
+    def finish(instance)
+      parent.finish instance if parent
 
       teardowns.each do |teardown|
-        teardown.call
+        instance.instance_exec(&teardown)
       end
     end
   end

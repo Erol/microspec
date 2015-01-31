@@ -8,22 +8,22 @@ module Microspec
       @_description
     end
 
-    def context
-      @_context
+    def instance
+      @_instance
     end
 
     def block
       @_block
     end
 
-    def initialize(description = nil, context: Microspec::Context, &block)
+    def initialize(description = nil, instance:, &block)
       @_description = description
-      @_context = context
+      @_instance = instance
       @_block = block
     end
 
     def perform
-      context.new.instance_eval(&block)
+      instance.instance_eval(&block)
     end
   end
 end

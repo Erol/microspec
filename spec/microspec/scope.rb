@@ -15,6 +15,16 @@ end
 define hash: -> { {o: :o} }
 
 scope do
+  setup do
+    hash.merge! O: :O
+  end
+
+  spec do
+    asserts(hash) == {o: :o, O: :O}
+  end
+end
+
+scope do
   define hash: -> { {O: :O} }
 
   spec do
