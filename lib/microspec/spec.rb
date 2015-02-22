@@ -8,22 +8,53 @@ module Microspec
       @_description
     end
 
-    def instance
-      @_instance
+    def scope
+      @_scope
+    end
+
+    def constants
+      @_constants ||= []
+    end
+
+    def namespace
+      @_namespace ||= block.binding.eval "Module.nesting.first"
+    end
+
+    def context
+      @_context
     end
 
     def block
       @_block
     end
 
-    def initialize(description = nil, instance:, &block)
+    def initialize(description = nil, scope:, &block)
       @_description = description
-      @_instance = instance
+      @_scope = scope
+      @_context = scope.context.new
       @_block = block
     end
 
     def perform
-      instance.instance_eval(&block)
+      sweep do
+        scope.start context
+
+        context.instance_eval(&block)
+
+        scope.finish context
+      end
+    end
+
+    def sweep
+      constants.push(*namespace.constants)
+
+      yield
+
+      constants = namespace.constants - self.constants
+
+      constants.each do |constant|
+        namespace.send :remove_const, constant
+      end
     end
   end
 end

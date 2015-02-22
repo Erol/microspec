@@ -56,6 +56,32 @@ end
 
 scope do
   setup do
+    class Klass
+    end
+  end
+
+  spec do
+    class Klass
+      def new
+      end
+    end
+
+    asserts(Klass.new.methods).include? :new
+  end
+
+  spec do
+    refutes(Klass.new.methods).include? :new
+  end
+end
+
+spec do
+  raises NameError do
+    Klass.new
+  end
+end
+
+scope do
+  setup do
     $a = :a
   end
 
