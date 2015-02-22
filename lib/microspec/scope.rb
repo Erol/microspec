@@ -50,14 +50,8 @@ module Microspec
     end
 
     def spec(description = nil, &block)
-      instance = context.new
-
-      start instance
-
-      spec = Spec.new description, instance: instance, &block
+      spec = Spec.new description, scope: self, &block
       spec.perform
-
-      finish instance
     end
 
     def initialize(description = nil, parent: nil, context: nil, &block)
@@ -71,6 +65,22 @@ module Microspec
       instance_eval(&block)
     end
 
+    def start(context)
+      parent.start context if parent
+
+      setups.each do |setup|
+        context.instance_eval(&setup)
+      end
+    end
+
+    def finish(context)
+      parent.finish context if parent
+
+      teardowns.each do |teardown|
+        context.instance_eval(&teardown)
+      end
+    end
+
     protected
 
     def setups
@@ -78,23 +88,7 @@ module Microspec
     end
 
     def teardowns
-      @_setups ||= []
-    end
-
-    def start(instance)
-      parent.start instance if parent
-
-      setups.each do |setup|
-        instance.instance_exec(&setup)
-      end
-    end
-
-    def finish(instance)
-      parent.finish instance if parent
-
-      teardowns.each do |teardown|
-        instance.instance_exec(&teardown)
-      end
+      @_teardowns ||= []
     end
   end
 end
