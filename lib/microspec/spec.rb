@@ -28,7 +28,7 @@ module Microspec
       @_block
     end
 
-    def initialize(description = nil, scope:, &block)
+    def initialize(description = nil, scope: Scope.new, &block)
       @_description = description
       @_scope = scope
       @_context = scope.context.new
