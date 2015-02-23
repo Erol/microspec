@@ -17,7 +17,7 @@ module Microspec
     end
 
     def namespace
-      @_namespace ||= block.binding.eval "Module.nesting.first"
+      @_namespace ||= block.binding.eval 'Module.nesting.first'
     end
 
     def context
